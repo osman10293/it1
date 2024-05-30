@@ -1,0 +1,89 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>Hotell temperatur</h1>
+    <input id="Dag" type="number" min="0" placeholder="Dagen">
+    <input id="Hotell1" type="text" placeholder="Hotell1 temperatur">
+    <input id="Hotell2" type="text" placeholder="Hotell2 temperatur">
+
+
+
+    <button id="btnOK" class="ok">Legg til</button>
+    <div id="firebaseInnhold"></div>
+
+    <script type="module">
+        // Lager variabler av eksisterende HTML-elementer
+        let Hotell1 = document.getElementById("Hotell1");
+        let Hotell2 = document.getElementById("Hotell2");
+        let Dag = document.getElementById("Dag");
+
+        let btnOK = document.getElementById("btnOK");
+        let firebaseInnhold = document.getElementById("firebaseInnhold");
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        import { getFirestore, query, collection, getDoc, getDocs, doc, addDoc, updateDoc, deleteDoc, onSnapshot, orderBy, where, limit } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Bytt ut de neste 8 linjene med det Firebase gir deg.
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsJPg7vVQMTFWnHsFjg4Q7-_lmSEu-hY4",
+            authDomain: "hotell-temperatur.firebaseapp.com",
+            projectId: "hotell-temperatur",
+            storageBucket: "hotell-temperatur.appspot.com",
+            messagingSenderId: "777111587892",
+            appId: "1:777111587892:web:981253d331124ae0f5ce61"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Legger til lytter på knappen
+        btnOK.addEventListener("click", skrivTilFirebase);
+        async function skrivTilFirebase() {
+            if (Hotell1.value == "" || Hotell2.value == "" || Dag.value == "") {
+                alert("du må skrive noe...");
+                return;
+            }
+
+            // Skriv dataene i Firebase
+            await addDoc(collection(db, "hotell"), {
+                Hotell1: Hotell1.value,
+                Hotell2: Hotell2.value,
+                Dag: Dag.value,
+
+            });
+
+            //Tøm inputfeltene
+            Hotell1.value = ""; Hotell2.value = ""; Dag.value = "";
+        }
+
+        // Spørring som henter hele kolleksjonen "s" i databasen
+        const q = query(collection(db, "hotell"));
+
+        // Oppdaterer HTML-siden ved endringer i databasen OG ved oppstart
+        onSnapshot(q, (HotellDokumenter) => {
+            // For hver gang nye ting legges til i db: Slett alt!
+            firebaseInnhold.innerHTML = "";
+
+            // Spinner gjennom alle elementene i database-tabellen
+            HotellDokumenter.forEach(temp);
+        });
+
+        //Skriv ut hvert enkelt dokument fra databasen
+        function temp(dok) {
+            firebaseInnhold.innerHTML += "<br><b>Dag: </b>" + dok.data().Dag + ", <b>Hotell1: </b>" + dok.data().Hotell1 + ", <b>Hotell2:</b>" + dok.data().Hotell2;
+        };
+
+        //Slett et bestemt dokument, krever at du har tatt vare på dokumentID når du hentet dataene
+        await deleteDoc(doc(db, "hotell", "VJpKD07jtedGhUFjGHJU"));
+
+    </script>
+</body>
+
+</html>

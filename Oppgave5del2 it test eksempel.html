@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    <h1 id="h1spm">Hva heter norges h;yeste fjell</h1>
+    <input id="inpsvar" type="text" placeholder="svar">
+    <button id="svar">Klikk</button>
+    <button id="nestesvar">neste </button>
+    <button>forrige sp;rsma[l</button>
+
+
+
+ 
+     
+</body>
+<script>
+    let svar = document.getElementById("svar");
+    let inpsvar = document.getElementById("inpsvar");
+    let spm1 = {spm:"hva heter norges h;yeste fjell", svar: "Galdh;piggen"};
+    let spm2 = {spm:"hva heter h;yeste fjell", svar1: "mt evrest"};
+    let nestesvar = document.getElementById("nestesvar");
+    let h1spm = document.getElementById("h1spm")
+    let spmArray=[spm1,spm2];
+
+
+    //svar.onclick = skjekksvar;
+    svar.addEventListener("click",skjekksvar)
+     
+    function skjekksvar() {
+        if (inpsvar.value == spmArray[1].svar){
+            alert("Nice");
+       }
+       else {
+        alert("TRY AGAIN");
+       }
+    }   
+    nestesvar.addEventListener("click",skjekkNestespmsvar);
+    function skjekkNestespmsvar(){
+        h1spm.innerHTML = spm2.spm1;
+        if (inpsvar.value == spmArray[2].svar){
+            alert("Nice");
+        }
+        else{
+            alert("NO");
+        }
+    }
+</script>
+</html>

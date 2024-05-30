@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>funksjon</title>
+</head>
+
+<body>
+    <script>
+        /***********************************************************************************/
+        //funksjon sum(part1, part2)                                                       */ 
+        //funksjon returnerer summen av to tall hvis de er like                            */
+        // part 1 er et tall                                                               */
+        //part 2 er et tall                                                                */
+        // hvis tallene ikk er like returneres "false"                                     */
+        //neste funksjon skal summere den forst tall parameter og den andre tall parameter */
+        // du fa svar som en alert melding i nettsiden chrome                              */
+        /***********************************************************************************/
+
+
+        function sF(a, b) {
+            return b - a;
+        }
+
+        function sum4(tall1, tall2, tall3, tall4) {
+
+            let tallene = [tall1, tall2, tall3, tall4];
+            tallene.sort(sF);
+
+
+
+            if (tallene[0] == tallene[1]) {
+                return (tallene[0] + tallene[1]);
+            }
+            if (tall1 == tall2) {
+                return (tall1 + tall2)
+            }
+
+            else if (tall1 == tall3) {
+                return (tall1 + tall3)
+            }
+            else if (tall2 == tall3) {
+                return (tall2 + tall3)
+            }
+            else if (tall4 == tall3) {
+                return (tall4 + tall3)
+            }
+            else if (tall4 == tall2) {
+                return (tall4 + tall2)
+            }
+            else if (tall4 == tall1) {
+                return (tall4 + tall1)
+            }
+            else {
+                return false;
+            }
+        }
+
+        let testtall = sum4(8, 9, 7, 7);
+        alert(testtall);
+    </script>
+</body>
+
+</html>

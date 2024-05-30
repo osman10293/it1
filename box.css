@@ -1,0 +1,93 @@
+.container{
+    display: flex;
+    justify-content: center;
+    column-gap: 50px;
+    row-gap: 50px;
+    margin-top: 150px;
+    flex-wrap: wrap;
+}
+.box:hover{
+    transform: translateY(-20px);
+    transition: transform 0.5s;
+}
+ 
+
+.box{
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(151, 151, 151);
+  
+}
+
+#navn{
+    border:3px solid hsl(192, 97%, 42%);
+    border-radius: 20px;
+    font-size: 3em;
+    width: 350px;
+    margin: auto;
+    text-align: center;
+}
+
+
+
+#box1{
+    background-color: hsl(0, 100%, 70%);
+}
+#box2{
+    background-color: hsl(51, 100%, 70%);
+}
+
+#box3{
+    background-color: hsl(126, 100%, 70%);
+}
+#box4{
+    background-color: hsl(203, 100%, 70%);
+}
+#box5{
+    background-color: hsl(124, 100%, 70%);
+}
+#box6{
+    background-color: hsl(231, 100%, 70%);
+}
+#box7{
+    background-color: hsl(164, 100%, 70%);
+}
+#box8{
+    background-color: hsl(247, 100%, 70%);
+}
+#box9{
+    background-color: hsl(206, 59%, 24%);
+    
+}
+#box10{
+    background-color: hsl(198, 30%, 35%);
+}
+#box11{
+    background-color: hsl(295, 85%, 23%);
+}
+
+#box12{
+    background-color: hsl(0, 88%, 26%);
+}
+
+#box13{
+    background-color: hsl(60, 78%, 45%);
+}
+
+#box14{ 
+    background-color: hsl(239, 92%, 49%);
+}
+#box15{
+    background-color: hsl(36, 96%, 53%);
+}
+#box16{
+    background-color: hsl(263, 99%, 33%);
+}
+

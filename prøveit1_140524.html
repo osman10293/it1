@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <p id="navn"></p>
+        <p id="tlf"></p>
+        <p id="epost"></p>
+        <p id="bilde"></p>
+        <p id="temp"></p>
+    </div>
+
+
+    <select id="Hotell"></select>
+
+    <script src="minhotellliste.js"></script>
+    <script>
+        var Hotell = document.getElementById("Hotell")
+        for (element in Hoteller.HotellArray) {
+            Hotell.innerHTML += "<option>" + Hoteller.HotellArray[element].navn + "</option>";
+        }
+        Hotell.onchange = function () {
+            navn.innerHTML = Hoteller.HotellArray[Hotell.selectedIndex].navn;
+            tlf.innerHTML = Hoteller.HotellArray[Hotell.selectedIndex].tlf;
+            epost.innerHTML = Hoteller.HotellArray[Hotell.selectedIndex].epost;
+            // på den siste programmet jeg prøver å vise tempereturene i de siste 7 dagene med å bruke Array. hvis du sletter programment temperatur i json fil så vil programmet funket.
+            temp.innerHTML =  Hoteller.HotellArray[Hotell.selectedIndex].temperatur[0] +  " og "  + Hoteller.HotellArray[Hotell.selectedIndex].temperatur[1];            
+
+        }
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
