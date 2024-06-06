@@ -1,13 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
 </head>
+
+<style>
+    
+    
+</style>
 
 <body>
     <h1>Hotell temperatur</h1>
-    <input id="Dag" type="number" min="0" placeholder="Dagen">
-    <input id="Hotell1" type="text" placeholder="Hotell1 temperatur">
-    <input id="Hotell2" type="text" placeholder="Hotell2 temperatur">
+    <input id="Hotellnavn" type="text" placeholder="Hotellnavn">
+    <input id="Hotelltemp" type="text" placeholder="Hotelltemperatur">
+    <input id="Dato" type="date">
+
+
+    <div id="gs">
+        <p id="g"></p>
+    </div>
+
 
 
 
@@ -16,9 +32,15 @@
 
     <script type="module">
         // Lager variabler av eksisterende HTML-elementer
-        let Hotell1 = document.getElementById("Hotell1");
-        let Hotell2 = document.getElementById("Hotell2");
-        let Dag = document.getElementById("Dag");
+        let Hotellnavn = document.getElementById("Hotellnavn");
+        let Hotelltemp = document.getElementById("Hotelltemp");
+        let Dato = document.getElementById("Dato");
+        let g = document.getElementById("g");
+
+        
+
+
+
 
         let btnOK = document.getElementById("btnOK");
         let firebaseInnhold = document.getElementById("firebaseInnhold");
@@ -42,25 +64,25 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        let gjennomsnitt;
 
         // Legger til lytter på knappen
         btnOK.addEventListener("click", skrivTilFirebase);
         async function skrivTilFirebase() {
-            if (Hotell1.value == "" || Hotell2.value == "" || Dag.value == "") {
+            if (Hotellnavn.value == "" || Hotelltemp.value == "" || Dato.value == "") {
                 alert("du må skrive noe...");
                 return;
             }
 
             // Skriv dataene i Firebase
             await addDoc(collection(db, "hotell"), {
-                Hotell1: Hotell1.value,
-                Hotell2: Hotell2.value,
-                Dag: Dag.value,
-
+                Hotellnavn: Hotellnavn.value,
+                Hotelltemp: Hotelltemp.value,
+                Dato: Dato.value
             });
 
             //Tøm inputfeltene
-            Hotell1.value = ""; Hotell2.value = ""; Dag.value = "";
+            Hotellnavn.value = ""; Hotelltemp.value = ""; Dato.value = "";
         }
 
         // Spørring som henter hele kolleksjonen "s" i databasen
@@ -73,11 +95,45 @@
 
             // Spinner gjennom alle elementene i database-tabellen
             HotellDokumenter.forEach(temp);
+            gjennomsnitt = finngjennomsnitt(Hot_temp);
+            
+            g.innerHTML =  gjennomsnitt;
+
         });
 
-        //Skriv ut hvert enkelt dokument fra databasen
+         
+
+        function finngjennomsnitt(temp) {
+            let sum = 0;
+            for (let i = 0; i < temp.length; i++) {
+                sum += temp[i];
+
+            }
+
+            let gjennomsnitt = sum / temp.length;
+            
+            return gjennomsnitt;
+        }
+
+       
+
+
+        let Hot_temp = []
+
         function temp(dok) {
-            firebaseInnhold.innerHTML += "<br><b>Dag: </b>" + dok.data().Dag + ", <b>Hotell1: </b>" + dok.data().Hotell1 + ", <b>Hotell2:</b>" + dok.data().Hotell2;
+
+
+
+            Hot_temp.push(Number(dok.data().Hotelltemp))
+
+
+
+
+
+
+
+            firebaseInnhold.innerHTML += "<br><b>Hotellnavn: </b>" + dok.data().Hotellnavn + ", <b>Hotelltemp: </b>" + dok.data().Hotelltemp + ", <b>Dato:</b>" + dok.data().Dato;
+
         };
 
         //Slett et bestemt dokument, krever at du har tatt vare på dokumentID når du hentet dataene
