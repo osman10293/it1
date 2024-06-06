@@ -16,13 +16,13 @@
 <body>
     <h1>Hotell temperatur</h1>
     <input id="Hotellnavn" type="text" placeholder="Hotellnavn">
-    <input id="Hotelltemp" type="text" placeholder="Hotelltemperatur">
+    <input id="Hotelltemp" type="number" placeholder="Hotelltemperatur">
     <input id="Dato" type="date">
 
 
-    <div id="gs">
+    
         <p id="g"></p>
-    </div>
+    
 
 
 
@@ -96,6 +96,7 @@
             // Spinner gjennom alle elementene i database-tabellen
             HotellDokumenter.forEach(temp);
             gjennomsnitt = finngjennomsnitt(Hot_temp);
+            alert(gjennomsnitt);
             g.innerHTML = "gjennomsnitt temperaturen er " + gjennomsnitt;
 
         });
